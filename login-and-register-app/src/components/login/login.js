@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
-import "./login.css"
+import "./login.css";
+import axios from 'axios';
 
 const Login = () => {
     const [user ,setUser] = useState({
@@ -21,6 +22,11 @@ const Login = () => {
       
         
     }
+
+    const login =()=> {
+        axios.post("http://localhost:9002/login",user)
+        .then(res => alert(res.data.message))
+    }
     
     return (
         <div className="login">
@@ -28,7 +34,7 @@ const Login = () => {
         <h1>login</h1>
         <input type="text" name="email" value={user.email} onChange={handleChange}placeholder="enter email" />
         <input type="password" name="password"  value={user.password} onChange={handleChange} placeholder="enter password"/>
-        <div className="button"> login</div>
+        <div className="button" onClick={login}> login</div>
         <div>or</div>
         <div className="button">register</div>
          
